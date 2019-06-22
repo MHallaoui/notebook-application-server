@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by EL HALLAOUI MAROUANE on 6/22/2019.
  */
-public class PlayLoad {
+public class UserCodePlayLoad {
 
     @JsonProperty("code")
     private String code;
