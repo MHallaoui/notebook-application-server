@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by Marouane EL HALLAOUI on 6/22/2019.
  */
-public class RemoteCodeExecutionResult {
+public class InterpretationResult {
     @JsonProperty("result")
     private String result;
 
-    public RemoteCodeExecutionResult(String result) {
+    public InterpretationResult(String result) {
         this.result = result;
     }
 }
