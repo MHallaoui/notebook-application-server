@@ -30,7 +30,7 @@ import com.oracle.labs.notebookserver.validation.UserCodeValidator;
 @RestController
 public class NoteBookEndpoint {
 
-    private final String regex = "^%([a-zA-Z]+)\\s([a-zA-Z0-9._%'\\-\\+\\s]+{1,500})";
+    private final String regex = "%([a-zA-Z]+)\\s([a-zA-Z0-9\\s().\"_%'\\-\\+]+)";
     private Logger logger = LoggerFactory.getLogger(NoteBookEndpoint.class);
     private Pattern CodePattern = Pattern.compile(regex);
 
