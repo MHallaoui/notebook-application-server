@@ -10,12 +10,13 @@ import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
  */
 public class PlayLoadParserImplementation extends AbstractUserCodeParser {
 
-
     @Override
     public ParserResult extractData(String receiveCode, Pattern codePattern) throws UnkownInterpreterType {
         Matcher matcher = codePattern.matcher(receiveCode);
         matcher.find();
-        if (!matcher.group(1).equals("javascript")) throw new UnkownInterpreterType("interpreter undefined");
+        if (!matcher.group(1).equals("javascript")) {
+            throw new UnkownInterpreterType("interpreter undefined");
+        }
 
         return new ParserResult(matcher.group(2), matcher.group(1));
     }

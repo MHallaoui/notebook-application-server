@@ -18,5 +18,4 @@ public abstract class AbstractUserCodeValidator {
         checkRequestContent(request);
         matchRequestPattern(request.getCode(), pattern);
     }
-
 }
