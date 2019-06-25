@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by Marouane EL HALLAOUI on 6/22/2019.
  */
-public class InterpretationResult {
+public class InterpretationResult implements AbstractInterpretationResult {
     @JsonProperty("result")
     private String result;
 
