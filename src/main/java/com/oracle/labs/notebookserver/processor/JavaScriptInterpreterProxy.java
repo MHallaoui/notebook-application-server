@@ -37,8 +37,7 @@ public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
 
     @Override
     public InterpretationResult processScript(String jsCode) throws UnkownInterpreterType {
-        runScript(jsCode);
-        String result = formattedExecutionResult();
+        String result =runScript(jsCode);
         return new InterpretationResult(result);
     }
 
