@@ -55,7 +55,7 @@ public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
         } catch (ScriptException e) {
             getLogger().error("Javascript code execution failed", e.getMessage());
             getLogger().warn(" Javascript code that generate the error is {} ", script);
-            return null;
+            throw new RuntimeException(e);
         }
     }
 

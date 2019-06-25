@@ -6,5 +6,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.oracle.labs.notebookserver.endpoint.*")
 public class EndpointConfiguration {
-
 }

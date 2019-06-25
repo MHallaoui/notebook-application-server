@@ -10,14 +10,17 @@ import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
  */
 public class PlayLoadParserImplementation extends AbstractUserCodeParser {
 
+    public static final int INTERPRETER_GROUP_INDEX = 1;
+    public static final int RAW_CODE_GROUP_INDEX = 2;
+
     @Override
     public ParserResult extractData(String receiveCode, Pattern codePattern) throws UnkownInterpreterType {
         Matcher matcher = codePattern.matcher(receiveCode);
         matcher.find();
-        if (!matcher.group(1).equals("javascript")) {
-            throw new UnkownInterpreterType("interpreter undefined");
-        }
 
-        return new ParserResult(matcher.group(2), matcher.group(1));
+        String targetInterpreterName = matcher.group(INTERPRETER_GROUP_INDEX);
+        String rawCode = matcher.group(RAW_CODE_GROUP_INDEX);
+
+        return new ParserResult(rawCode, targetInterpreterName);
     }
 }

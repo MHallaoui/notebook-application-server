@@ -2,17 +2,18 @@ package com.oracle.labs.notebookserver.processor;
 
 import java.io.Writer;
 
+import javax.script.ScriptException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.oracle.labs.notebookserver.endpoint.NoteBookEndpoint;
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 import com.oracle.labs.notebookserver.formatter.AbstractInterpreterResultFormatter;
 import com.oracle.labs.notebookserver.model.AbstractInterpretationResult;
 
 public abstract class AbstractInterpreterProcessor<ResultType extends AbstractInterpretationResult, ExecutionResultOutputWrapperType extends Writer> {
 
-    protected Logger logger = LoggerFactory.getLogger(NoteBookEndpoint.class);
+    protected Logger logger = LoggerFactory.getLogger(AbstractInterpreterProcessor.class);
     private ExecutionResultOutputWrapperType executionResultOutputWrapper;
     private AbstractInterpreterResultFormatter resultFormatter;
 
@@ -21,7 +22,7 @@ public abstract class AbstractInterpreterProcessor<ResultType extends AbstractIn
         this.resultFormatter = formatter;
     }
 
-    public abstract ResultType processScript(String jsCode) throws UnkownInterpreterType;
+    public abstract ResultType processScript(String jsCode) throws UnkownInterpreterType, ScriptException;
 
     protected ExecutionResultOutputWrapperType getExecutionResultOutputWrapper() {
         return executionResultOutputWrapper;

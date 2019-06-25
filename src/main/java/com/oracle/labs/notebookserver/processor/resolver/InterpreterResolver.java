@@ -13,7 +13,7 @@ public class InterpreterResolver {
             case "javascript":
                 return JavaScriptInterpreterProxyFactory.getInterpreter();
             default:
-                throw new UnkownInterpreterType("interpreter undefined");
+                throw new UnkownInterpreterType("interpreter is not supported");
         }
     }
 }

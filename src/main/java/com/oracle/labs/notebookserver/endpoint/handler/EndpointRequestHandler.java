@@ -37,7 +37,7 @@ public class EndpointRequestHandler extends AbstractEndpointRequestHandler {
             return new ResponseEntity(exception.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (UnkownInterpreterType exception) {
             logger.error("Interpreter type is undefined", exception.getMessage());
-            return new ResponseEntity(exception.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_IMPLEMENTED);
         } catch (Exception generalException) {
             logger.error("Received request {} is invalid", request.getCode());
             return new ResponseEntity(generalException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
