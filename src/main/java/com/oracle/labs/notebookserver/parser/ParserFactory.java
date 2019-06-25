@@ -7,7 +7,7 @@ public class ParserFactory {
     private static AbstractPlayloadParser parserInstace;
 
     static {
-        parserInstace = new PlayLoadParserImplementation();
+        parserInstace = new PlayloadParserImplementation();
     }
 
     public static AbstractPlayloadParser getParser() {
