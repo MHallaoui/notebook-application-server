@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.oracle.labs</groupId>
     <artifactId>notebook-server-application</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
     <name>notebook-server-application</name>
     <description>A simple notebook server that can execute pieces of code in an interpreter using Spring Boot
         technology
