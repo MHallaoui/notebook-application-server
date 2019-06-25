@@ -1,20 +1,16 @@
 package com.oracle.labs.notebookserver.endpoint;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
+public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest {
     public static final String EXECUTE_ENDPOINT_PATH = "/execute";
     public static final String HTTP_LOCALHOST_BASIC_URL = "http://localhost:";
     TestRestTemplate httpRequester = new TestRestTemplate();
@@ -37,15 +33,16 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
 
     @Test
     public void shouldEvaluateJavascriptCodeInPlayLoadSuccessfullyWithOutput() throws Exception {
-        String validJavaScriptPlayLoad = "{" +
-            "\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"" +
-            "}";
+        String validJavaScriptPlayLoad = new StringBuilder().append("{")
+                .append("\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"")
+                .append("}")
+                .toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
 
         String currentExecutionResult = response.getBody();
-        String expectedExecutionResult = "{\"result\"" + ":" + "\"12\"" + "}";
+        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":" + "\"12\"").append("}").toString();
 
         assertEquals(expectedExecutionResult, currentExecutionResult);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -53,13 +50,13 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
 
     @Test
     public void shouldEvaluateJavascriptCodeInPlayLoadSuccessfullyWithoutOutput() throws Exception {
-        String validJavaScriptPlayLoad = "{" + "\"code\": \"%javascript  var a = 10; var b = a + 1\"" + "}";
+        String validJavaScriptPlayLoad = new StringBuilder().append("{").append("\"code\": \"%javascript  var a = 10; var b = a + 1\"").append("}").toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
 
         String currentExecutionResult = response.getBody();
-        String expectedExecutionResult = "{\"result\"" + ":" + "\"\"" + "}";
+        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":").append("\"\"").append("}").toString();
 
         assertEquals(expectedExecutionResult, currentExecutionResult);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -67,7 +64,7 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
 
     @Test
     public void shouldTriggerHttpMessageNotReadableExceptionWhenJSONMappingFailed() {
-        String validJavaScriptPlayLoad = "{" + "\"code: \"%javascript  var a = 10; var b = a + 1;\"" + "}";
+        String validJavaScriptPlayLoad = new StringBuilder().append("{").append("\"code: \"%javascript  var a = 10; var b = a + 1;\"").append("}").toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
 
@@ -84,7 +81,7 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
     @Test
     public void shouldReturnSpecificMessageWhenInterpreterIsUnsupported() {
         String unsupportedInterpreter = "blabla";
-        String validJavaScriptPlayLoad = "{" + "\"code\": \"%" + unsupportedInterpreter + "  var a = 10; var b = a + 1\"" + "}";
+        String validJavaScriptPlayLoad = new StringBuilder().append("{").append("\"code\": \"%").append(unsupportedInterpreter).append("  var a = 10; var b = a + 1\"").append("}").toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
@@ -98,7 +95,7 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
 
     @Test
     public void shouldTriggerExecutionExceptionWhenJavaScriptCodeIsWrong() throws Exception {
-        String validJavaScriptPlayLoad = "{" + "\"code\": \"%javascript  var a =; 10\"" + "}";
+        String validJavaScriptPlayLoad = new StringBuilder().append("{").append("\"code\": \"%javascript  var a =; 10\"").append("}").toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
@@ -111,7 +108,7 @@ public class NoteBookEndpointv1AndJavascriptSupportIntegrationTest{
 
     private ResponseEntity<String> sendRequest(HttpEntity<String> httpRestRequest) {
         return httpRequester.exchange(
-            createEndpointURLWithPort(), HttpMethod.POST, httpRestRequest, String.class);
+                createEndpointURLWithPort(), HttpMethod.POST, httpRestRequest, String.class);
     }
 
     private HttpEntity<String> createRequestEntityObject(String valideJavaScriptPlayLoad) {
