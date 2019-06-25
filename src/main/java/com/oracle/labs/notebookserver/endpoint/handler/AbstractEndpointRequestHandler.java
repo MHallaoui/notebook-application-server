@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 
 import com.oracle.labs.notebookserver.model.InputPlayLoad;
-import com.oracle.labs.notebookserver.validation.AbstractUserCodeValidator;
+import com.oracle.labs.notebookserver.validation.AbstractPlayloadValidator;
 import com.oracle.labs.notebookserver.validation.UserCodeValidator;
 
 public abstract class AbstractEndpointRequestHandler {
@@ -15,7 +15,7 @@ public abstract class AbstractEndpointRequestHandler {
     protected static final String regex = "%([a-zA-Z]+)\\s([a-zA-Z0-9\\s();=.\"_{}%'\\-\\+]+)";
     protected static Pattern CodePattern = Pattern.compile(regex);
     protected Logger logger = LoggerFactory.getLogger(EndpointRequestHandler.class);
-    protected AbstractUserCodeValidator requestValidator = new UserCodeValidator();
+    protected AbstractPlayloadValidator requestValidator = new UserCodeValidator();
 
     abstract public ResponseEntity processRequest(InputPlayLoad request);
 }

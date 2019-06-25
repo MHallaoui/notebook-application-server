@@ -8,7 +8,7 @@ import com.oracle.labs.notebookserver.model.InputPlayLoad;
 /**
  * Created by EL HALLAOUI MAROUANE on 6/23/2019.
  */
-public abstract class AbstractUserCodeValidator {
+public abstract class AbstractPlayloadValidator {
 
     abstract protected void matchRequestPattern(String input, Pattern pattern) throws WrongFormatException;
 
