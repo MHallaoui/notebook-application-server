@@ -4,13 +4,13 @@ package com.oracle.labs.notebookserver.parser;
  * Created by EL HALLAOUI MAROUANE on 6/23/2019.
  */
 public class ParserFactory {
-    private static AbstractUserCodeParser parserInstace;
+    private static AbstractPlayLoadParser parserInstace;
 
     static {
         parserInstace = new PlayLoadParserImplementation();
     }
 
-    public static AbstractUserCodeParser getParser() {
+    public static AbstractPlayLoadParser getParser() {
         return parserInstace;
     }
 }

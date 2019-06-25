@@ -8,7 +8,7 @@ import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 /**
  * Created by EL HALLAOUI MAROUANE on 6/23/2019.
  */
-public class PlayLoadParserImplementation extends AbstractUserCodeParser {
+public class PlayLoadParserImplementation extends AbstractPlayLoadParser {
 
     public static final int INTERPRETER_GROUP_INDEX = 1;
     public static final int RAW_CODE_GROUP_INDEX = 2;
