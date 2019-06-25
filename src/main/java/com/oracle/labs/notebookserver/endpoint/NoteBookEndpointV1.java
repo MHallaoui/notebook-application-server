@@ -15,7 +15,7 @@ import com.oracle.labs.notebookserver.model.InputPlayLoad;
  */
 
 @RestController
-public class NoteBookEndpoint {
+public class NoteBookEndpointV1 {
 
     @Autowired
     private EndpointRequestHandler requestHandler;
