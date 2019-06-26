@@ -1,10 +1,10 @@
 package com.oracle.labs.notebookserver.parser;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 
@@ -26,6 +26,4 @@ public class PlayloadParserImplementationTest {
         Assert.assertEquals("javascript", parsingOperationResult.getInterpreterType());
         Assert.assertEquals("var a =; 10;", parsingOperationResult.getRawCode());
     }
-
-
 }

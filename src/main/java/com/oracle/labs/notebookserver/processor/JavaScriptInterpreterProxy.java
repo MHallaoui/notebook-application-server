@@ -6,7 +6,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 import com.oracle.labs.notebookserver.formatter.FormattersFactory;
 import com.oracle.labs.notebookserver.model.AbstractInterpretationResult;
 import com.oracle.labs.notebookserver.model.InterpretationResult;
@@ -18,6 +17,7 @@ import com.oracle.labs.notebookserver.model.InterpretationResult;
 public class JavascriptInterpreterProxy extends AbstractInterpreterProcessor<AbstractInterpretationResult, StringWriter> {
 
     private static final String NATIVE_JAVASCRIPT_ENGINE = "nashorn";
+    private static final String LANGUAGE_NAME = "javascript";
     private static ScriptEngineManager scriptEngineManager;
     private static ScriptEngine nashornEngine;
 
@@ -27,7 +27,7 @@ public class JavascriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
     }
 
     public JavascriptInterpreterProxy() {
-        super(new StringWriter(), FormattersFactory.getJavaScriptFormatter());
+        super(new StringWriter(), FormattersFactory.getFormatterFor(LANGUAGE_NAME));
         redirectOutputToDesiredWrapper();
     }
 
@@ -36,7 +36,7 @@ public class JavascriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
     }
 
     @Override
-    public InterpretationResult processScript(String jsCode) throws UnkownInterpreterType {
+    public InterpretationResult processScript(String jsCode) {
         String result = runScript(jsCode);
         return new InterpretationResult(result);
     }

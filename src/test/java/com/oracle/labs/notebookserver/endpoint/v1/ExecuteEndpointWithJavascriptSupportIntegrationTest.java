@@ -41,9 +41,9 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
     @Test
     public void shouldEvaluateJavascriptCodeSuccessfullyWithOutput() throws Exception {
         String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR)
-                .append("\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"")
-                .append(CLOSED_BRACCET_STR)
-                .toString();
+            .append("\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"")
+            .append(CLOSED_BRACCET_STR)
+            .toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);

@@ -7,18 +7,30 @@ import static com.oracle.labs.notebookserver.formatter.JavascriptInterpreterResu
 
 public class JavaScriptInterpreterResultFormatterTest {
 
+    public static final String formatterInput = "{\"result\":\"12\" ";
     private JavascriptInterpreterResultFormatter jsResultFormatter = new JavascriptInterpreterResultFormatter();
 
     @Test
     public void shouldEliminateEndlCaracterFromExecutionResultWhenItExists() {
 
-        String rawStringResult = new StringBuilder().append("{\"result\":\"12\" ")
+        String rawStringResult = new StringBuilder().append(formatterInput)
             .append(ENDL_CARACTER)
             .append("}").toString();
-        String expectedResult = new StringBuilder().append("{\"result\":\"12\" ")
+        String expectedResult = new StringBuilder().append(formatterInput)
             .append("}").toString();
         String formattigResult = jsResultFormatter.format(rawStringResult);
 
         Assert.assertEquals(expectedResult, formattigResult);
+    }
+
+    @Test
+    public void shouldNotImpactExecutionResultWhenEndlCaracterDidNotExists() {
+
+        String rawStringResult = new StringBuilder().append(formatterInput)
+            .append("}").toString();
+
+        String formattigResult = jsResultFormatter.format(rawStringResult);
+
+        Assert.assertEquals(rawStringResult, formattigResult);
     }
 }

@@ -12,4 +12,8 @@ public class InterpretationResult implements AbstractInterpretationResult {
     public InterpretationResult(String result) {
         this.result = result;
     }
+
+    public String getResult() {
+        return result;
+    }
 }

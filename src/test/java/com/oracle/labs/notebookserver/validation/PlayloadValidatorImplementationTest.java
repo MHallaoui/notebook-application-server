@@ -23,12 +23,12 @@ public class PlayloadValidatorImplementationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void shouldTriggerRuntimeExceptionWhenRequestIsNull() throws UnexpectedPlayloadFormatException, CodeFormatException{
+    public void shouldTriggerRuntimeExceptionWhenRequestIsNull() throws UnexpectedPlayloadFormatException, CodeFormatException {
         validator.validateRequestContent(null, pattern);
     }
 
     @Test(expected = UnexpectedPlayloadFormatException.class)
-    public void shouldNotValidatPlayloadRequestIsEmpty() throws UnexpectedPlayloadFormatException, CodeFormatException{
+    public void shouldNotValidatPlayloadRequestIsEmpty() throws UnexpectedPlayloadFormatException, CodeFormatException {
         InputPlayload playload = Mockito.mock(InputPlayload.class);
         Mockito.when(playload.getCode()).thenReturn("");
         validator.validateRequestContent(playload, pattern);
@@ -57,5 +57,4 @@ public class PlayloadValidatorImplementationTest {
         Mockito.when(playload.getCode()).thenReturn("%someinterpreter  ");
         validator.validateRequestContent(playload, pattern);
     }
-
 }

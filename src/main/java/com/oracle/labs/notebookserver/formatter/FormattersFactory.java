@@ -8,7 +8,16 @@ public class FormattersFactory {
         javaScriptFormatter = new JavascriptInterpreterResultFormatter();
     }
 
-    public static JavascriptInterpreterResultFormatter getJavaScriptFormatter() {
+    private static JavascriptInterpreterResultFormatter getJavaScriptFormatter() {
         return javaScriptFormatter;
+    }
+
+    public static AbstractInterpreterResultFormatter getFormatterFor(String languageName) {
+        switch (languageName) {
+            case "javascript":
+                return getJavaScriptFormatter();
+            default:
+                throw new RuntimeException("interpreter type is undefined");
+        }
     }
 }
