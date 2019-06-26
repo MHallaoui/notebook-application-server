@@ -2,13 +2,13 @@ package com.oracle.labs.notebookserver.formatter;
 
 public class FormattersFactory {
 
-    static private JavaScriptInterpreterResultFormatter javaScriptFormatter;
+    static private JavascriptInterpreterResultFormatter javaScriptFormatter;
 
     static {
-        javaScriptFormatter = new JavaScriptInterpreterResultFormatter();
+        javaScriptFormatter = new JavascriptInterpreterResultFormatter();
     }
 
-    public static JavaScriptInterpreterResultFormatter getJavaScriptFormatter() {
+    public static JavascriptInterpreterResultFormatter getJavaScriptFormatter() {
         return javaScriptFormatter;
     }
 }

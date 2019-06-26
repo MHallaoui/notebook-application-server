@@ -15,7 +15,7 @@ import com.oracle.labs.notebookserver.model.InterpretationResult;
  * Created by EL HALLAOUI MAROUANE on 6/23/2019.
  */
 
-public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<AbstractInterpretationResult, StringWriter> {
+public class JavascriptInterpreterProxy extends AbstractInterpreterProcessor<AbstractInterpretationResult, StringWriter> {
 
     private static final String NATIVE_JAVASCRIPT_ENGINE = "nashorn";
     private static ScriptEngineManager scriptEngineManager;
@@ -26,7 +26,7 @@ public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
         nashornEngine = scriptEngineManager.getEngineByName(NATIVE_JAVASCRIPT_ENGINE);
     }
 
-    public JavaScriptInterpreterProxy() {
+    public JavascriptInterpreterProxy() {
         super(new StringWriter(), FormattersFactory.getJavaScriptFormatter());
         redirectOutputToDesiredWrapper();
     }
@@ -37,7 +37,7 @@ public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
 
     @Override
     public InterpretationResult processScript(String jsCode) throws UnkownInterpreterType {
-        String result =runScript(jsCode);
+        String result = runScript(jsCode);
         return new InterpretationResult(result);
     }
 
@@ -47,15 +47,22 @@ public class JavaScriptInterpreterProxy extends AbstractInterpreterProcessor<Abs
 
         try {
             nashornEngine.eval(script);
-            String result = formattedExecutionResult();
-            getLogger().info("Javascript code execution is done Successfully");
-            getLogger().info("Javascript code execution result output -- {}", result);
-            return result;
+            String evaluationResult = formattedExecutionResult();
+
+            logSuccessfullExecution(script, evaluationResult);
+            return evaluationResult;
         } catch (ScriptException e) {
-            getLogger().error("Javascript code execution failed", e.getMessage());
-            getLogger().warn(" Javascript code that generate the error is {} ", script);
+            logUnsuccessfullExecution(script, e);
             throw new RuntimeException(e);
         }
+    }
+
+    private void logUnsuccessfullExecution(String script, ScriptException e) {
+        getLogger().error("Javascript code {} execution failed  caused by : {}", script, e.getMessage());
+    }
+
+    private void logSuccessfullExecution(String script, String evaluationResult) {
+        getLogger().info("Javascript code {} execution success with output result: {}", script, evaluationResult);
     }
 
     private void clearWrapperBeforeExecution() {

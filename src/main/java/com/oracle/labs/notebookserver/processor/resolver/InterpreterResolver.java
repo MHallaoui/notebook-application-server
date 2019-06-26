@@ -2,7 +2,7 @@ package com.oracle.labs.notebookserver.processor.resolver;
 
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 import com.oracle.labs.notebookserver.processor.AbstractInterpreterProcessor;
-import com.oracle.labs.notebookserver.processor.factory.JavaScriptInterpreterProxyFactory;
+import com.oracle.labs.notebookserver.processor.factory.JavascriptInterpreterProxyFactory;
 
 public class InterpreterResolver {
 
@@ -11,7 +11,7 @@ public class InterpreterResolver {
         switch (interpreterType) {
 
             case "javascript":
-                return JavaScriptInterpreterProxyFactory.getInterpreter();
+                return JavascriptInterpreterProxyFactory.getInterpreter();
             default:
                 throw new UnkownInterpreterType("interpreter is not supported");
         }

@@ -1,16 +1,16 @@
 package com.oracle.labs.notebookserver.processor.factory;
 
-import com.oracle.labs.notebookserver.processor.JavaScriptInterpreterProxy;
+import com.oracle.labs.notebookserver.processor.JavascriptInterpreterProxy;
 
-public class JavaScriptInterpreterProxyFactory {
+public class JavascriptInterpreterProxyFactory {
 
-    static private JavaScriptInterpreterProxy javaScriptInterpreterProxy;
+    static private JavascriptInterpreterProxy javaScriptInterpreterProxy;
 
     static {
-        javaScriptInterpreterProxy = new JavaScriptInterpreterProxy();
+        javaScriptInterpreterProxy = new JavascriptInterpreterProxy();
     }
 
-    public static JavaScriptInterpreterProxy getInterpreter() {
+    public static JavascriptInterpreterProxy getInterpreter() {
         return javaScriptInterpreterProxy;
     }
 }
