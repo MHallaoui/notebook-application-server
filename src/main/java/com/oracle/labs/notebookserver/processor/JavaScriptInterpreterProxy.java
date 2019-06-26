@@ -1,10 +1,9 @@
 package com.oracle.labs.notebookserver.processor;
 
-import java.io.StringWriter;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.io.StringWriter;
 
 import com.oracle.labs.notebookserver.formatter.FormattersFactory;
 import com.oracle.labs.notebookserver.model.AbstractInterpretationResult;

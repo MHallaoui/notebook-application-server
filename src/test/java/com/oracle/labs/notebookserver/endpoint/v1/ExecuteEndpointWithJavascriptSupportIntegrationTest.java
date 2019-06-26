@@ -1,20 +1,16 @@
 package com.oracle.labs.notebookserver.endpoint.v1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -25,8 +21,8 @@ import static org.junit.Assert.assertTrue;
 public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
     public static final String EXECUTE_ENDPOINT_PATH = "/execute";
     public static final String HTTP_LOCALHOST_BASIC_URL = "http://localhost:";
-    public static final String OPEN_BRACCET_STR = "{";
-    public static final String CLOSED_BRACCET_STR = "}";
+    public static final String LEFT_BRACE = "{";
+    public static final String RIGHT_BRACE = "}";
     public static final String EMPTY_JSON_PROPERTY_VALUE = "\"\"";
     TestRestTemplate httpRequester = new TestRestTemplate();
     HttpHeaders headers = new HttpHeaders();
@@ -40,16 +36,16 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
 
     @Test
     public void shouldEvaluateJavascriptCodeSuccessfullyWithOutput() throws Exception {
-        String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR)
-            .append("\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"")
-            .append(CLOSED_BRACCET_STR)
-            .toString();
+        String validJavaScriptPlayLoad = new StringBuilder().append(LEFT_BRACE)
+                .append("\"code\": \"%javascript  var a = 10; var b = a + 1;function someFunction(b) { return b + 1; }; print( someFunction(b));\"")
+                .append(RIGHT_BRACE)
+                .toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
 
         String currentExecutionResult = response.getBody();
-        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":" + "\"12\"").append(CLOSED_BRACCET_STR).toString();
+        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":" + "\"12\"").append(RIGHT_BRACE).toString();
 
         assertEquals(expectedExecutionResult, currentExecutionResult);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -57,13 +53,13 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
 
     @Test
     public void shouldEvaluateJavascriptCodeSuccessfullyWithoutOutput() throws Exception {
-        String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR).append("\"code\": \"%javascript  var a = 10; var b = a + 1\"").append(CLOSED_BRACCET_STR).toString();
+        String validJavaScriptPlayLoad = new StringBuilder().append(LEFT_BRACE).append("\"code\": \"%javascript  var a = 10; var b = a + 1\"").append(RIGHT_BRACE).toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
 
         String currentExecutionResult = response.getBody();
-        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":").append(EMPTY_JSON_PROPERTY_VALUE).append(CLOSED_BRACCET_STR).toString();
+        String expectedExecutionResult = new StringBuilder().append("{\"result\"").append(":").append(EMPTY_JSON_PROPERTY_VALUE).append(RIGHT_BRACE).toString();
 
         assertEquals(expectedExecutionResult, currentExecutionResult);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -71,7 +67,7 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
 
     @Test
     public void shouldTriggerExceptionWhenJSsonMappingFailed() {
-        String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR).append("\"code: \"%javascript  var a = 10; var b = a + 1;\"").append(CLOSED_BRACCET_STR).toString();
+        String validJavaScriptPlayLoad = new StringBuilder().append(LEFT_BRACE).append("\"code: \"%javascript  var a = 10; var b = a + 1;\"").append(RIGHT_BRACE).toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
 
@@ -88,7 +84,7 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
     @Test
     public void shouldReturnSpecificMessageWhenInterpreterIsUnsupported() {
         String unsupportedInterpreter = "blabla";
-        String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR).append("\"code\": \"%").append(unsupportedInterpreter).append("  var a = 10; var b = a + 1\"").append(CLOSED_BRACCET_STR).toString();
+        String validJavaScriptPlayLoad = new StringBuilder().append(LEFT_BRACE).append("\"code\": \"%").append(unsupportedInterpreter).append("  var a = 10; var b = a + 1\"").append(RIGHT_BRACE).toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
@@ -102,7 +98,7 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
 
     @Test
     public void shouldTriggerExecutionExceptionWhenJavascriptCodeIsWrong() throws Exception {
-        String validJavaScriptPlayLoad = new StringBuilder().append(OPEN_BRACCET_STR).append("\"code\": \"%javascript  var a =; 10\"").append(CLOSED_BRACCET_STR).toString();
+        String validJavaScriptPlayLoad = new StringBuilder().append(LEFT_BRACE).append("\"code\": \"%javascript  var a =; 10\"").append(RIGHT_BRACE).toString();
 
         HttpEntity<String> httpRestRequest = createRequestEntityObject(validJavaScriptPlayLoad);
         ResponseEntity<String> response = sendRequest(httpRestRequest);
@@ -115,7 +111,7 @@ public class ExecuteEndpointWithJavascriptSupportIntegrationTest {
 
     private ResponseEntity<String> sendRequest(HttpEntity<String> httpRestRequest) {
         return httpRequester.exchange(
-            createEndpointUrlWithPort(), HttpMethod.POST, httpRestRequest, String.class);
+                createEndpointUrlWithPort(), HttpMethod.POST, httpRestRequest, String.class);
     }
 
     private HttpEntity<String> createRequestEntityObject(String valideJavaScriptPlayLoad) {

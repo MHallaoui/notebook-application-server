@@ -1,11 +1,10 @@
 package com.oracle.labs.notebookserver.processor;
 
-import java.io.Writer;
-
-import javax.script.ScriptException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.script.ScriptException;
+import java.io.Writer;
 
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 import com.oracle.labs.notebookserver.formatter.AbstractInterpreterResultFormatter;

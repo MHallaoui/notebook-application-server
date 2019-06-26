@@ -2,7 +2,7 @@ package com.oracle.labs.notebookserver.formatter;
 
 import org.springframework.util.StringUtils;
 
-public class JavascriptInterpreterResultFormatter implements AbstractInterpreterResultFormatter {
+public class JavascriptResultFormatter implements AbstractInterpreterResultFormatter {
 
     public static final String ENDL_CARACTER = "\r\n";
     public static final String EMPTY_STRING = "";

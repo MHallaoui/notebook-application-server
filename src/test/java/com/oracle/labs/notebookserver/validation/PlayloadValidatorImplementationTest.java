@@ -1,11 +1,11 @@
 package com.oracle.labs.notebookserver.validation;
 
-import java.util.regex.Pattern;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import java.util.regex.Pattern;
 
 import com.oracle.labs.notebookserver.endpoint.handler.AbstractEndpointRequestHandler;
 import com.oracle.labs.notebookserver.exception.CodeFormatException;

@@ -1,9 +1,10 @@
 package com.oracle.labs.notebookserver.endpoint.handler;
 
-import java.util.regex.Pattern;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.regex.Pattern;
+
 import org.springframework.http.ResponseEntity;
 
 import com.oracle.labs.notebookserver.endpoint.v1.EndpointRequestHandler;

@@ -1,10 +1,10 @@
 package com.oracle.labs.notebookserver.parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 

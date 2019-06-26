@@ -9,7 +9,7 @@ public class FormattersFactoryTest {
     public void parserFactoryShouldReturnFormatterInstanceForJavascript() throws RuntimeException {
         AbstractInterpreterResultFormatter formatterInstance = FormattersFactory.getFormatterFor("javascript");
         Assert.assertNotNull(formatterInstance);
-        Assert.assertTrue(formatterInstance instanceof JavascriptInterpreterResultFormatter);
+        Assert.assertTrue(formatterInstance instanceof JavascriptResultFormatter);
     }
 
     @Test(expected = RuntimeException.class)

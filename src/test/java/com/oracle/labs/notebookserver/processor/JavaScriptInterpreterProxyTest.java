@@ -6,7 +6,7 @@ import org.junit.Test;
 import com.oracle.labs.notebookserver.exception.UnkownInterpreterType;
 import com.oracle.labs.notebookserver.model.InterpretationResult;
 
-public class JavaScriptInterpreterProxyTest {
+public class JavascriptInterpreterProxyTest {
 
     private JavascriptInterpreterProxy javascriptInterpreter = new JavascriptInterpreterProxy();
 
